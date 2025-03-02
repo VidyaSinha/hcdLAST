@@ -1,5 +1,5 @@
 import psycopg2
-import env
+import dotenv
 def main():
     conn = psycopg2.connect('DATABASE_URL')
 
