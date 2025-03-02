@@ -2,7 +2,7 @@ import os
 from supabase import create_client, Client
 import dotenv
 
-SUPABASE_URL = os.getenv('supabase_url')
+SUPABASE_URL = os.getenv('SUPABASE_URL')
 SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
 # 🔹 Initialize Supabase Client with Service Role Key
