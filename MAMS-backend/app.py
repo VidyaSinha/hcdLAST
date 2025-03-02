@@ -19,9 +19,8 @@ CORS(app, resources={r"/*": {"origins": ["http://localhost:8080", "http://localh
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-app.config["SUPABASE_URL"]=os.getenv("SUPABASE_URL")# Change this to a strong secret key
-app.config["SUPABASE_KEY"]=os.getenv("SUPABASE_KEY")# Change this to a strong secret key
-
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 db = SQLAlchemy(app)
 
 # 🔹 User Model
