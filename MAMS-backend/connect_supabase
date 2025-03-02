@@ -1,0 +1,45 @@
+import os
+from supabase import create_client, Client
+import env
+
+SUPABASE_URL = os.getenv('supabase_url')
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+
+# 🔹 Initialize Supabase Client with Service Role Key
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+
+def upload_file(bucket_name, user_id, file_path, file_name):
+    """Uploads a file to Supabase Storage and returns its public URL."""
+    if not os.path.exists(file_path):
+        print("❌ Error: File not found at", file_path)
+        return None
+
+    file_path_in_storage = f"uploads/{user_id}/{file_name}"  # Store file in user-specific folder
+
+    try:
+        with open(file_path, "rb") as file:
+            # 🔹 Upload file
+            response = supabase.storage.from_(bucket_name).upload(file_path_in_storage, file)
+
+        # 🔹 Check if upload was successful
+        if isinstance(response, dict) and response.get("error"):
+            print("❌ Upload Error:", response["error"])
+            return None
+
+        # 🔹 Get public URL
+        file_url = supabase.storage.from_(bucket_name).get_public_url(file_path_in_storage)
+        return file_url
+
+    except Exception as e:
+        print("❌ Upload Exception:", e)
+        return None
+
+# 🔹 Test Upload
+user_id = "136k76s_0"  # Replace with actual Supabase auth UID
+bucket_name = "enrollment-docs"
+file_path = "./dhruviphoto.jpg"  # Replace with actual path
+file_name = "dhruviphoto.pdf"  # Storage path in Supabase
+
+url = upload_file(bucket_name, user_id, file_path, file_name)
+if url:
+    print("✅ File uploaded successfully:", url)
