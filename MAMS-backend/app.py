@@ -18,7 +18,9 @@ CORS(app, resources={r"/*": {"origins": ["http://localhost:8080", "http://localh
 # 🔹 PostgreSQL Connection (Aiven)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")  # Change this to a strong secret key
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["SUPABASE_URL"]=os.getenv("SUPABASE_URL")# Change this to a strong secret key
+app.config["SUPABASE_KEY"]=os.getenv("SUPABASE_KEY")# Change this to a strong secret key
 
 db = SQLAlchemy(app)
 
@@ -56,7 +58,7 @@ class EnrollmentRatio(db.Model):
 # Supabase configuration
 
 
-supabase: Client = create_client(supabase_url, supabase_key)
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # 🔹 Register API
 @app.route("/api/auth/register", methods=["POST"])
@@ -239,7 +241,7 @@ def upload_placement_details():
             
             # Get the public URL - construct it properly
             bucket_name = "documents"
-            file_url = f"{supabase_url}/storage/v1/object/public/{bucket_name}/{file_path}"
+            file_url = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{file_path}"
             
             print(f"File uploaded successfully to Supabase. URL: {file_url}")
             
