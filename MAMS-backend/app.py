@@ -8,7 +8,10 @@ from supabase import create_client, Client
 import os
 from werkzeug.utils import secure_filename
 import uuid
-import dotenv
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 
