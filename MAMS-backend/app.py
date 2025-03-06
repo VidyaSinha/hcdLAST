@@ -16,7 +16,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # 🔹 Enable CORS for multiple frontend origins
-CORS(app, resources={r"/*": {"origins": ["http://localhost:8080", "http://localhost:8081", "http://127.0.0.1:3000", "https://madms-backend.onrender.com" "https://madms-backend.onrender.com"]}}) 
+CORS(app, resources={r"/*": {"origins": ["http://localhost:8080", "http://localhost:8081", "http://127.0.0.1:3000", "https://madms-backend.onrender.com" ,"https://madms.vercel.app"]}}) 
 
 # 🔹 PostgreSQL Connection (Aiven)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv('DATABASE_URL')
