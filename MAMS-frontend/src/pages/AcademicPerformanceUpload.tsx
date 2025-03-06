@@ -22,7 +22,7 @@ const AcademicPerformanceUpload = () => {
   useEffect(() => {
     const fetchGrNumbers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/students/all");
+        const response = await fetch("https://madms-backend.onrender.com/api/students/all");
         const data = await response.json();
         setGrNumbers(data.map((student: { gr_no: string }) => student.gr_no));
       } catch (error) {
@@ -38,7 +38,7 @@ const AcademicPerformanceUpload = () => {
     if (selectedGrNumber) {
       const fetchStudentDetails = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/students/${selectedGrNumber}`);
+          const response = await fetch(`https://madms-backend.onrender.com/api/students/${selectedGrNumber}`);
           const data = await response.json();
           setStudentDetails({ name: data.name, department: data.department });
         } catch (error) {
@@ -76,7 +76,7 @@ const AcademicPerformanceUpload = () => {
     formData.append("appeared_for_exam", appearedForExam);
 
     try {
-      const response = await fetch("http://localhost:5000/api/academic-performance", {
+      const response = await fetch("https://madms-backend.onrender.com/api/academic-performance", {
         method: "POST",
         body: formData,
       });

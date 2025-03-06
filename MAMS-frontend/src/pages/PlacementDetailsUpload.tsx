@@ -25,7 +25,7 @@ const PlacementDetailsUpload = () => {
     // Fetch students from the backend
     const fetchStudents = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/students");
+        const response = await fetch("https://madms-backend.onrender.com/api/students");
         const data = await response.json();
         setStudents(data);
       } catch (error) {
@@ -85,7 +85,7 @@ const PlacementDetailsUpload = () => {
         proofName: proof.name
       });
 
-      const response = await fetch("http://localhost:5000/api/placement-details", {
+      const response = await fetch("https://madms-backend.onrender.com/api/placement-details", {
         method: "POST",
         body: formData,
       });

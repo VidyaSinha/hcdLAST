@@ -23,7 +23,7 @@ const UploadDocuments = () => {
   useEffect(() => {
     const fetchGrNumbers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/students/available-for-documents");
+        const response = await fetch("https://madms-backend.onrender.com/api/students/available-for-documents");
         const data = await response.json();
         setGrNumbers(data.map((student: { gr_no: string }) => student.gr_no));
       } catch (error) {
@@ -67,7 +67,7 @@ const UploadDocuments = () => {
       formData.append('registration_form', registrationForm);
       formData.append('gujcet', gujcetResult);
 
-      const response = await fetch('http://localhost:5000/api/documents/upload', {
+      const response = await fetch('https://madms-backend.onrender.com/api/documents/upload', {
         method: 'POST',
         body: formData,
       });
@@ -85,7 +85,7 @@ const UploadDocuments = () => {
       });
 
       // Refresh the GR numbers list
-      const updatedGrResponse = await fetch("http://localhost:5000/api/students/available-for-documents");
+      const updatedGrResponse = await fetch("https://madms-backend.onrender.com/api/students/available-for-documents");
       const updatedGrData = await updatedGrResponse.json();
       setGrNumbers(updatedGrData.map((student: { gr_no: string }) => student.gr_no));
       
