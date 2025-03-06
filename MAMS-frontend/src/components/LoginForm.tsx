@@ -29,7 +29,7 @@ const LoginForm = () => {
 
     try {
       const endpoint = isRegistering ? "register" : "login";
-      const response = await axios.post(`http://127.0.0.1:5000/api/auth/${endpoint}`, {
+      const response = await axios.post(`https://madms-backend.onrender.com/api/auth/${endpoint}`, {
         email,
         password,
       });
